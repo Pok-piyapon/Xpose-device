@@ -5,6 +5,9 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -41,7 +44,20 @@ jobs:
           ./gradlew --no-daemon --stacktrace :app:assembleBlackBox64Release
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Xpose-Device-arm64
           path: app/build/outputs/apk/BlackBox64/release/*.apk
+
+      # Publish the APK on the Releases page so it can be downloaded on a phone
+      - name: Rename APK
+        run: cp app/build/outputs/apk/BlackBox64/release/*.apk Xpose-Device-arm64.apk
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Xpose Device build ${{ github.run_number }}
+          body: "APK สำหรับ Android 64-bit จาก commit ${{ github.sha }}"
+          files: Xpose-Device-arm64.apk
+          make_latest: true
