@@ -21,13 +21,12 @@ jobs:
             11
             17
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install SDK packages (NDK, CMake, build tools)
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "ndk;21.0.6113669" "cmake;3.10.2.4988404" \
+          # Use the SDK that ships with the runner image
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "ndk;21.0.6113669" "cmake;3.10.2.4988404" \
                      "build-tools;29.0.2" "build-tools;30.0.3" \
                      "platforms;android-29" "platforms;android-30"
 
