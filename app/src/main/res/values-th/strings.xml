@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_device_profile">ปลอมรุ่นเครื่อง</string>
+    <string name="device_profile_title">ให้แอปนี้เห็นเครื่องเป็นรุ่น</string>
+    <string name="device_profile_real">เครื่องจริง (ปิด)</string>
+    <string name="device_profile_saved">บันทึกแล้ว ปิดแล้วเปิดแอปใหม่เพื่อใช้งาน</string>
+    <string name="app_stop">หยุดแอป</string>
+    <string name="app_clear">ล้างข้อมูล</string>
+    <string name="app_remove">ถอนการติดตั้ง</string>
+</resources>
