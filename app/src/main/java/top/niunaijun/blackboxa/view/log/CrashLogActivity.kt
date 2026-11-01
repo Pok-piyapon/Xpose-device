@@ -103,11 +103,34 @@ class CrashLogActivity : AppCompatActivity() {
             val process = ProcessBuilder(
                 "logcat", "-d", "-v", "time",
                 "-b", "main", "-b", "system", "-b", "crash",
-                "-t", "1500", "*:W"
+                "-t", "4000", "*:W"
             ).redirectErrorStream(true).start()
-            val out = process.inputStream.bufferedReader().readText()
+            val lines = process.inputStream.bufferedReader().readLines()
             process.waitFor()
-            header + if (out.isBlank()) getString(R.string.crash_log_empty) else out
+            if (lines.isEmpty()) return header + getString(R.string.crash_log_empty)
+
+            // Lines that never explain a crash but fill the log on OPPO/ColorOS
+            val noise = listOf(
+                "avc:", "VRI[", "OplusBracketLog", "OpenGLRenderer", "OplusCustomize",
+                "WindowOnBackDispatcher", "/FA ", "GCloudVoice", "/INTL ", "SchedAssist",
+                "ApkAssets", "hiddenapi", "BootstrapClass", "/QT ", "FeatureFlags"
+            )
+            val useful = lines.filter { l -> noise.none { l.contains(it) } }
+
+            // Put fatal errors first so they survive copy/paste size limits
+            val fatal = useful.filter {
+                it.contains("FATAL") || it.contains("/AndroidRuntime") || it.contains("/DEBUG") ||
+                    it.contains("Fatal signal") || it.contains("/libc ") || it.contains(" F/") ||
+                    it.contains("ActionBarCrashGuard") || it.contains("DeviceSpoofer") ||
+                    it.contains("Abort message") || it.contains("backtrace") || it.contains("#0")
+            }
+            buildString {
+                append(header)
+                append("=== FATAL / KEY LINES (").append(fatal.size).append(") ===\n")
+                fatal.takeLast(300).forEach { append(it).append('\n') }
+                append("\n=== RECENT LOG (last 400 filtered lines) ===\n")
+                useful.takeLast(400).forEach { append(it).append('\n') }
+            }
         } catch (t: Throwable) {
             header + "logcat failed: " + t
         }
