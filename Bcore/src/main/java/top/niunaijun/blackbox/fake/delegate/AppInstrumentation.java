@@ -109,8 +109,14 @@ public final class AppInstrumentation extends BaseInstrumentationDelegate implem
         ActivityInfo info = BRActivity.get(activity).mActivityInfo();
         ContextCompat.fix(activity);
         ActivityCompat.fix(activity);
-        if (info.theme != 0) {
-            activity.getTheme().applyStyle(info.theme, true);
+        // Same rule as ActivityInfo.getThemeResource(): an activity without its own
+        // theme uses the application theme. Skipping that left the container's stub
+        // theme (with an action bar) on fullscreen game activities, which crashed in
+        // WindowDecorActionBar.doHide when the game hid the system bars.
+        int theme = info.theme != 0 ? info.theme
+                : (info.applicationInfo != null ? info.applicationInfo.theme : 0);
+        if (theme != 0) {
+            activity.getTheme().applyStyle(theme, true);
         }
         ActivityManagerCompat.setActivityOrientation(activity, info.screenOrientation);
     }
