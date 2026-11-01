@@ -85,4 +85,13 @@
     <string name="device_profile_title">Report this app as</string>
     <string name="device_profile_real">Real device (off)</string>
     <string name="device_profile_saved">Saved. Restart the app to apply.</string>
+    <string name="crash_log">Crash Log</string>
+    <string name="crash_log_summary">View and copy recent logs after an app closes unexpectedly</string>
+    <string name="crash_log_hint">Open the game until it closes, then come back here and tap Refresh.</string>
+    <string name="crash_log_refresh">Refresh</string>
+    <string name="crash_log_copy">Copy</string>
+    <string name="crash_log_share">Share</string>
+    <string name="crash_log_loading">Loading…</string>
+    <string name="crash_log_empty">No log lines found.</string>
+    <string name="crash_log_copied">Log copied</string>
 </resources>

@@ -37,6 +37,11 @@
                 android:title="@string/libc_hook_disable"
                 android:summary="@string/libc_hook_disable_summary"/>
 
+        <Preference
+                android:key="crash_log"
+                android:title="@string/crash_log"
+                android:summary="@string/crash_log_summary"/>
+
         <SwitchPreferenceCompat
                 app:key="daemon_enable"
                 app:title="@string/daemon_enable" />

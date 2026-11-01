@@ -7,4 +7,13 @@
     <string name="app_stop">หยุดแอป</string>
     <string name="app_clear">ล้างข้อมูล</string>
     <string name="app_remove">ถอนการติดตั้ง</string>
+    <string name="crash_log">Log ตอนแอปเด้ง</string>
+    <string name="crash_log_summary">ดูและคัดลอก log ล่าสุดหลังจากแอปปิดตัวเอง</string>
+    <string name="crash_log_hint">เปิดเกมจนเด้ง แล้วกลับมาหน้านี้ กด รีเฟรช จากนั้นกด คัดลอก หรือ แชร์</string>
+    <string name="crash_log_refresh">รีเฟรช</string>
+    <string name="crash_log_copy">คัดลอก</string>
+    <string name="crash_log_share">แชร์</string>
+    <string name="crash_log_loading">กำลังโหลด…</string>
+    <string name="crash_log_empty">ไม่พบ log</string>
+    <string name="crash_log_copied">คัดลอก log แล้ว</string>
 </resources>

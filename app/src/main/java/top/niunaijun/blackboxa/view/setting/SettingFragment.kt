@@ -49,6 +49,10 @@ class SettingFragment : PreferenceFragmentCompat() {
             LibcHookActivity.start(requireContext())
             true
         }
+        findPreference<Preference>("crash_log")!!.setOnPreferenceClickListener {
+            top.niunaijun.blackboxa.view.log.CrashLogActivity.start(requireContext())
+            true
+        }
         initGms()
 
         invalidHideState{
