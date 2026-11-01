@@ -43,7 +43,7 @@ public final class DeviceSpoofer {
         setBuildField("PRODUCT", profile.product);
 
         hookSystemProperties(profile.toProperties());
-        Slog.d(TAG, packageName + " -> " + profile.label);
+        Slog.w(TAG, packageName + " -> " + profile.label + " (MODEL now " + Build.MODEL + ")");
     }
 
     private static void setBuildField(String name, String value) {

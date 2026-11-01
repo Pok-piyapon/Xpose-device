@@ -373,6 +373,7 @@ public class BActivityThread extends IBActivityThread.Stub {
         assert packageContext != null;
         IOCore.get().enableRedirect(packageContext);
         fakeStorageManagerStatus();
+        top.niunaijun.blackbox.app.compat.ActionBarCrashGuard.install();
         // Report the chosen device model (if any) so the game unlocks its graphics options
         top.niunaijun.blackbox.core.device.DeviceSpoofer.apply(getUserId(), packageName);
 
